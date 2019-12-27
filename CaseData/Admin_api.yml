@@ -1,0 +1,30 @@
+# 数据标签
+interface:
+  #增加评论
+  - url: /review/admin/add
+    feature_name: "Admin"
+    story_name: "test_admin_add"
+    description: '增加灌水评论/回复接口'
+    method: POST
+
+  #逻辑删除
+  - url: /review/admin/delete
+    feature_name: "Admin"
+    story_name: "test_admin_delete"
+    description: '逻辑删除'
+    method: GET
+    test_case_list:
+      "test_01_delete":
+        description: appId 为空 返回空
+        add_irrigation_review:
+          userId: 189
+          appId: bikan
+          docId: 18
+        status_code: 401
+        get_UserSign: bikan
+        requests:
+          appId:
+        response:
+
+
+
