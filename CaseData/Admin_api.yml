@@ -1,30 +1,80 @@
-# 数据标签
+# 一级标题名称
+feature_name: "name"
+# 接口用例
 interface:
-  #增加评论
-  - url: /review/admin/add
-    feature_name: "Admin"
-    story_name: "test_admin_add"
-    description: '增加灌水评论/回复接口'
+  #接口
+  - url: /api/post
+    story_name: post
     method: POST
-
-  #逻辑删除
-  - url: /review/admin/delete
-    feature_name: "Admin"
-    story_name: "test_admin_delete"
-    description: '逻辑删除'
-    method: GET
     test_case_list:
-      "test_01_delete":
-        description: appId 为空 返回空
-        add_irrigation_review:
-          userId: 189
-          appId: bikan
-          docId: 18
-        status_code: 401
-        get_UserSign: bikan
-        requests:
-          appId:
-        response:
+      -
+        case_name: test_01_
+        description: desc
+        confest:
+        teststeps:
+          -
+            name: step_01_
+            des:
+            url: item.url
+            method: item.method
+            headers: {"Content-Type":"application/json"}
+            body: {}
+            requests: {}
+            response: {'status': 200, 'message': 'ok','time':}
+            jsonpath:
+            extract: {'entity':'$.entity'}
+
+          -
+            name: step_02
+            des: 验证
+            url: /api/get
+            method: GET
+            body:
+            headers:
+            requests: {'announceId': {'step_name': 'step_01_', 'extract': entity},
+            response: {'status': 200, 'message': 'ok','time':}
+            jsonpath:
+            extract:
 
 
-
+  #删除接口
+  - url: /api/delete
+    story_name: delete
+    method: POST
+    test_case_list:
+      -
+        case_name: test_01_
+        description:
+        confest: add
+        teststeps:
+          -
+            name: step_01_delete
+            des:
+            url: item.url
+            method: item.method
+            headers:
+            body:
+            requests: {'announceId': {'conftest':'entity'}, 'skipAuth': True, 'userId': 123000000, 'appId': 'music'}
+            response: {'status': 200, 'message': 'ok','time':}
+            jsonpath:
+            extract:
+          -
+            name: step_02_verify
+            des: 2.删除成功
+            url: /api/detail
+            method: GET
+            body:
+            headers:
+            requests: {'announceId': {'conftest':'entity'}, 'skipAuth': True, 'appId': 'music'}
+            response: {'status': 200, 'message': 'ok','time':}
+            jsonpath: [{
+                         "json_path": '$..records[*].title',
+                         "expect_value": "删除",
+                         "method": "=="
+                       },{
+                         "json_path": '$..records[*].auditStatus',
+                         "expect_value": -10,
+                         "method": "=="
+                       }
+                       ]
+            extract:

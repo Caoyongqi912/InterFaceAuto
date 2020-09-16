@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2019/9/23
 # @Author  : caoyongqi
-# @Email   : v-caoyongqi@xiaomi.com
 # @File    : Request.py
 import json
 import requests

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2019/9/23
 # @Author  : caoyongqi
-# @Email   : v-caoyongqi@xiaomi.com
 # @File    : Assert.py
+
 from jsonpath import jsonpath
 from Common import Log
 
@@ -129,8 +128,3 @@ class Assertion:
                 raise
         else:
             raise
-
-
-if __name__ == '__main__':
-    Assertion().assert_kv({"status": -4, "desc": "参数 'docId' 错误"},
-                          {"status": -4, "desc": "参数 'docId' 错误"})
